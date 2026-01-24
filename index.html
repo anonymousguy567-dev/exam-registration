@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RUET Exam Registration Pro | Official Logo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+<div class="ui-wrapper">
+    <div class="glass-card">
+        <h2> Exam Registration Form</h2>
+        
+        <div class="input-grid">
+            <div class="field">
+                <label>বিভাগ</label>
+                <select id="dept-select" onchange="autoLoad()">
+                    <option value="যন্ত্র">যন্ত্র</option>
+                    <option value="তড়িৎ">তড়িৎ</option>
+                    <option value="পুরো">পুরো</option>
+                    <option value="কেমি">কেমি</option>
+                    <option value="কম্পিউটার সায়েন্স">কম্পিউটার সায়েন্স</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>বর্ষ</label>
+                <select id="year-select" onchange="autoLoad()">
+                    <option value="১ম">১ম</option>
+                    <option value="২য়">২য়</option>
+                    <option value="৩য়">৩য়</option>
+                    <option value="৪র্থ" selected>৪র্থ</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>সেমিস্টার</label>
+                <select id="semester-select" onchange="autoLoad()">
+                    <option value="জোড়" selected>জোড়</option>
+                    <option value="বিজোড়">বিজোড়</option>
+                </select>
+            </div>
+            <div class="field"><label>পরীক্ষার সাল</label><input type="text" id="exam-year" placeholder="২০২৪"></div>
+            <div class="field"><label>রোল নম্বর</label><input type="text" id="roll"></div>
+            <div class="field"><label>নিবন্ধন সংখ্যা</label><input type="text" id="reg"></div>
+            <div class="field"><label>শিক্ষা বর্ষ</label><input type="text" id="session" placeholder="২০২০-২০২১"></div>
+            <div class="field"><label>নাম (বাংলা)</label><input type="text" id="name-bn"></div>
+            <div class="field"><label>Student Name (English)</label><input type="text" id="name-en"></div>
+            <div class="field"><label>পিতার নাম (বাংলা)</label><input type="text" id="fname-bn"></div>
+            <div class="field"><label>Father's Name (English)</label><input type="text" id="fname-en"></div>
+        </div>
+        <div class="field full-width"><label>বর্তমান ঠিকানা</label><input type="text" id="address"></div>
+
+        <div class="course-section">
+            <h3>কোর্স তালিকা </h3>
+            <div id="course-container"></div>
+            <button class="btn-add" onclick="addManualRow()">＋ ম্যানুয়ালি কোর্স যোগ করুন</button>
+        </div>
+
+        <button class="btn-download" onclick="exportPDF()">ডাউনলোড পিডিএফ (Legal Size)</button>
+    </div>
+</div>
+
+<div id="pdf-wrapper">
+    <div class="pdf-page" id="pdf-content">
+        <div class="p-header">
+            <img src="https://i.ibb.co.com/0pfH6Ptv/Screenshot-2026-01-20-015616.jpg" class="p-logo" alt="RUET Logo">
+            <p>ঐশী জ্যোতিই আমাদের পথ প্রদর্শক</p>
+            <p>পরীক্ষা নিয়ন্ত্রকের কার্যালয়</p>
+            <h3>রাজশাহী প্রকৌশল ও প্রযুক্তি বিশ্ববিদ্যালয়</h3>
+        </div>
+      
+      <div class="office-box" style="border-top: 1.5px solid black; margin-top: 10px;">
+        <div class="p-title">বি.এস-সি. ইঞ্জিনিয়ারিং পরীক্ষায় অংশ গ্রহণের আবেদনপত্র</div>
+        <p class="p-instruction">(ফরমের ১ম অংশ ছাত্র, ২য় অংশ বিভাগীয় প্রধানের অফিস এবং ৩য় অংশ পরীক্ষা নিয়ন্ত্রকের অফিস পূরণ করিবে)</p>
+
+        <div class="p-recipient">বরাবর,<br>পরীক্ষা নিয়ন্ত্রক,<br>রাজশাহী প্রকৌশল ও প্রযুক্তি বিশ্ববিদ্যালয়।</div>
+        <div class="p-para">
+            জনাব,<br>
+            আমি <span class="p-dot" id="v-exam-year" style="width:50px; flex-grow:0;"></span> সালের বি.এস-সি ইঞ্জিনিয়ারিং 
+            <span class="p-dot" id="v-year" style="width:40px; flex-grow:0;"></span> বর্ষ 
+            <span class="p-dot" id="v-dept" style="width:100px; flex-grow:0;"></span> কৌশল 
+            <span class="p-dot" id="v-sem" style="width:60px; flex-grow:0;"></span> সেমিস্টার/ব্যাকলগ/শর্ট সেমিস্টার পরীক্ষায় নিয়মিত/অনিয়মিত পরীক্ষার্থী রূপে অংশ গ্রহণের অনুমতি প্রদানের জন্য আপনার নিকট সবিনয় আবেদন করিতেছি।
+        </div>
+
+        <div class="p-details">
+            <div class="p-line"><b>১। পরীক্ষার্থীর পূর্ণ নাম স্পষ্টাক্ষরে(এস.এস.সি সার্টিফিকেট অনুসারে):</b> </div>
+            <div class="p-line"><b>বাংলা:</b> <span class="p-dot" id="v-name-bn"></span></div>
+            <div class="p-line"><b>ইংরেজী :</b> <span class="p-dot" id="v-name-en"></span></div>
+            
+            <div class="p-line"><b>২। পিতার নাম :</b></div>
+            <div class="p-line"><b>বাংলা:</b> <span class="p-dot" id="v-fname-bn"></span></div>
+            <div class="p-line"><b>ইংরেজী :</b> <span class="p-dot" id="v-fname-en"></span></div>
+
+            <div class="p-line">
+                <b>৩। নিবন্ধন সংখ্যা :</b> <span class="p-dot" id="v-reg"></span> 
+                <span style="margin-left:5px;"><b>শিক্ষা বর্ষ :</b> </span><span class="p-dot" id="v-session"></span> 
+                <span style="margin-left:5px;"><b>রোল নং :</b></span><span class="p-dot" id="v-roll"></span>
+            </div>
+            <div class="p-line"><b>৪। বর্তমান ঠিকানা :</b> <span class="p-dot" id="v-address"></span></div>
+        </div>
+
+        <div style="margin-top: 8px; font-weight: bold;"><b>৫। যে বিষয় সমূহে পরীক্ষা দিতে ইচ্ছুক :</b></div>
+        <table class="p-table">
+            <thead><tr><th width="10%">ক্রঃ নং</th><th width="25%">কোর্স নং</th><th>কোর্সের শিরোনাম</th></tr></thead>
+            <tbody id="p-tbody"></tbody>
+        </table>
+
+        <p class="p-pledge"><b>আমি অঙ্গীকার করিতেছি যে, যদি আমার প্রদত্ত তথ্যাবলী অসত্য প্রমাণিত হয় অথবা এই পরীক্ষায় আমার অংশ গ্রহণের ব্যাপারে কোন আপত্তি উত্থাপিত হয়, তাহা হইলে বিশ্ববিদ্যালয় কর্তৃপক্ষের সিদ্ধান্ত মানিয়া লইব।</b></p>
+
+        <div class="p-sign-area">
+            <div>তারিখ : .............................
+            পরীক্ষার্থীর পূর্ণ স্বাক্ষর : ..........................................................................................................................................</div>
+        </div>
+
+        <div class="office-box">
+            <h4>বিভাগীয় প্রধানের অফিস পূরণ করিবে</h4>
+          <p class="p-pledge"><b>আমি নিশ্চয়তা প্রদান করিতেছি যে, উপরোল্লিখিত পরীক্ষার্থীর তত্ত্বীয়/ব্যবহারিক ক্লাস সম্পর্কে যথাযথ ব্যবস্থা গৃহীত হইয়াছে। তাহাকে উল্লেখিত পরীক্ষায় অংশ গ্রহণের জন্য সুপারিশ করা হইল / হইল না।</b></p>
+            <div style="height: 40px;"></div>
+            <div style="text-align: right;"><b>বিভাগীয় প্রধান</b></div>
+        </div>
+<br>
+        </br>
+        <div class="office-box" style="border-top: 1.5px solid black; margin-top: 10px;">
+            <h4>পরীক্ষা নিয়ন্ত্রকের অফিস পূরণ করিবে</h4>
+          <p class="p-pledge"><b>উপরোক্ত ছাত্র/ছাত্রীকে পরীক্ষায় অংশ গ্রহণের অনুমতি প্রদান করা হইল / হইল না।</b></p>
+            <div style="text-align: right; margin-top: 25px;"><b>পরীক্ষা নিয়ন্ত্রক</b></div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
